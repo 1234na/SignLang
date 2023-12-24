@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link href="styles/style.css" rel="stylesheet" type="text/css" />
+    <link rel="shortcut icon" href="/images/icon.png" type="image/x-icon">
+</head>
+<body>
+    <h1>Переводчик</h1>
+    <p>
+        Бобро поржаловать и тэдэ и тэпэ
+    </p>
+<video width="400" autoplay id="video-player"></video>
+<script>
+if(navigator.webkitGetUserMedia!=null) {
+  var options = {
+    video:true,
+  };
+
+  navigator.webkitGetUserMedia(options,
+    function(stream) {
+      var video = document.getElementById('video-player');
+      video.srcObject = stream;
+    },
+    function(e) {
+      console.log("произошла ошибка");
+    }
+  );
+}
+</script>
+</body>
+</html>
