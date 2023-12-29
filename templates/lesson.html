@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Lesson {{lesson_num}}</title>
-    <link href="styles/style.css" rel="stylesheet" type="text/css" />
-    <link rel="shortcut icon" href="images/icon.png" type="image/x-icon">
+    <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet" type="text/css" />
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/icon.png') }}" type="image/x-icon">
 </head>
 <body>
     <div class="head">
         <h1>Урок {{lesson_num}}</h1>
         <p class="avatar">
-            <img src="/images/ava.png" height="80">
+            <img src="{{ url_for('static', filename='images/ava.png') }}" height="80">
         </p>
     </div>
     <div class="card">
