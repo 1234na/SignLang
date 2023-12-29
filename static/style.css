@@ -4,27 +4,25 @@ html {
   font-family: 'ISOCPEUR Regular';
 }
 
+h1 {
+  margin: 10px;
+  padding: 20px 0;
+  color: #414a4c;
+}
+
+video {
+    border: 20px solid #ffcc00;
+    border-radius:  20px;
+    video-radius: 20px;
+    transform: scale(-1, 1)
+}
+
 .head {
     border: 10px solid #ffcc00;
     border-radius:  20px;
     background-color: #ffcc00;
     background-radius: 10px;
     margin: 20px;
-}
-
-.exercise {
-    border: 10px solid #ffcc00;
-    border-radius:  20px;
-    background-color: #fcdd76;
-    background-radius: 10px;
-    margin: 20px;
-}
-
-.exercise img {
-    position: absolute;
-    margin: 0 center;
-    top: 200px;
-    right: 400px;
 }
 
 .avatar {
@@ -34,7 +32,7 @@ html {
 .avatar img {
     position: absolute;
     margin: 0 right;
-    top: -95px;
+    margin-top: -95px;
     right: 20px;
 }
 
@@ -48,15 +46,10 @@ button {
     border: 1px solid #666;
 }
 
-h1 {
-  margin: 10px;
-  padding: 20px 0;
-  color: #414a4c;
-}
-
-video {
-    border: 20px solid #ffcc00;
+.card {
+    border: 10px solid #ffcc00;
     border-radius:  20px;
-    video-radius: 20px;
-    transform: scale(-1, 1)
+    background-color: #fcdd76;
+    background-radius: 10px;
+    margin: 20px;
 }
