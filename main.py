@@ -1,6 +1,7 @@
 from flask import Flask
 from flask import render_template
 import sqlite3
+import random
 
 # from flask import request
 # from camera import SignLang
@@ -11,19 +12,27 @@ username = None
 connection = sqlite3.connect('signlang_user.db', check_same_thread=False)
 cursor = connection.cursor()
 
+
 @app.route('/')
 def home():
     return 'HOMEPAGE'
 
-@app.route('/lesson/<lesson_num>')
-def lesson(lesson_num):
-    cursor.execute('SELECT * FROM tasks WHERE id = ?', (int(lesson_num),))
+
+@app.route('/lesson/<lesson_num>/<task_num>')
+def lesson(lesson_num, task_num):
+    cursor.execute('SELECT * FROM tasks WHERE complexity = ? AND id = ?', (int(lesson_num), int(task_num)))
     lesson = cursor.fetchall()[0]
-    return render_template('lesson.html', lesson_num=lesson_num, task_image=lesson[2], correct_answer=lesson[3])
+    buttons = list(lesson[3:])
+    correct_answer = lesson[3]
+    random.shuffle(buttons)
+    return render_template('lesson.html', lesson_num=lesson_num, task_image='images/gestures/' + lesson[2], button_1=buttons[0], \
+                           button_2=buttons[1], button_3=buttons[2], button_4=buttons[3], task_num=int(task_num))
+
 
 @app.route('/user/<username>')
 def profil(username):
     return render_template('profil.html', username=username)
+
 
 @app.route('/my_lessons/<user_id>')
 def lessons(user_id):

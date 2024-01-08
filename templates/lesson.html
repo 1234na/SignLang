@@ -17,11 +17,11 @@
         </p>
     </div>
     <div class="card">
-        <div class="card_image"><img src="{{ url_for('static', filename='images/gestures/Б.png') }}" height="300"></div>
-        <button type="button" class="first">{{correct_answer}}</button>
-        <button type="button" class="second">Б</button>
-        <button type="button" class="third">В</button>
-        <button type="button" class="fourth">Г</button>
+        <div class="card_image"><img src="{{ url_for('static', filename=task_image) }}" height="300"></div>
+        <button type="button" class="first" onclick="lesson(lesson_num, task_num + 1)">{{button_1}}</button>
+        <button type="button" class="second" onclick="checking_correct()">{{button_2}}</button>
+        <button type="button" class="third" onclick="checking_correct()">{{button_3}}</button>
+        <button type="button" class="fourth" onclick="checking_correct()">{{button_4}}</button>
     </div>
 </body>
 </html>
