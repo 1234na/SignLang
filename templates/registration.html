@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet" type="text/css" />
+  <link rel="shortcut icon" href="{{ url_for('static', filename='images/icon.png') }}" type="image/x-icon">
+  <title>Регистрация</title>
+  </head>
+    <body>
+      <div class="head">
+          <h1>Форма для регистрации</h1>
+      </div>
+      <div class="sidebar">
+        <a href="/">На главную</a>
+      </div>
+
+      <div class="main">
+        <form class="login_form" method="post">
+          <p>
+            <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Введите адрес почты" name="email">
+          </p>
+          <p>
+            <input type="text" class="form-control" id="name" placeholder="Введите ваше имя" name="name">
+          </p>
+          <p>
+            <input type="text" class="form-control" id="username" placeholder="Придумайте никнейм" name="username">
+          </p>
+          <p>
+            <input type="password" class="form-control" id="password" aria-describedby="passwordHelp" placeholder="Введите пароль" name="password">
+          </p>
+          <p>
+            <button type="submit" class="continue">Подтвердить регистрацию</button>
+          </p>
+        </form>
+      </div>
+    </body>
+</html>

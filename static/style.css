@@ -105,7 +105,7 @@ button {
     top: -92px;
 }
 
-.card {
+.main {
     position: absolute;
     top: 160px;
     left: 200px;
@@ -123,4 +123,25 @@ button {
     top: 10px;
     width: 300px;
     height: 300px;
+}
+
+input {
+  position: relative;
+  margin: 0 0 0 20px;
+  padding: 30px 30px;
+  color: #333;
+  background-color: #e0ffff;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 10px;
+  border: 5px solid #666;
+  width: 150px;
+  height: 15px;
+}
+
+.continue {
+    background-color: #c7fcec;
+    padding: 10px 30px;
+    font-size: 20px;
+    margin: 0 0 0 20px;
 }

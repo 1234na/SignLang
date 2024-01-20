@@ -16,12 +16,14 @@
             <img src="{{ url_for('static', filename='images/ava.png') }}" height="80">
         </p>
     </div>
-    <div class="card">
+    <div class="main">
         <div class="card_image"><img src="{{ url_for('static', filename=task_image) }}" height="300"></div>
-        <button type="button" class="first" onclick="lesson(lesson_num, task_num + 1)">{{button_1}}</button>
-        <button type="button" class="second" onclick="checking_correct()">{{button_2}}</button>
-        <button type="button" class="third" onclick="checking_correct()">{{button_3}}</button>
-        <button type="button" class="fourth" onclick="checking_correct()">{{button_4}}</button>
+        <form>
+            <button type="button" id=button_1 class="first">{{button_1}}</button>
+            <button type="button" class="second" onclick="checking_correct()">{{button_2}}</button>
+            <button type="button" class="third" onclick="checking_correct()">{{button_3}}</button>
+            <button type="button" class="fourth" onclick="checking_correct()">{{button_4}}</button>
+        </form>
     </div>
 </body>
 </html>

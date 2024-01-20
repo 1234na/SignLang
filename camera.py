@@ -56,3 +56,5 @@ class SignLang():
         camera.release()
         cv2.destroyAllWindows()
 
+a = SignLang()
+a.camera()

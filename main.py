@@ -3,7 +3,7 @@ from flask import render_template
 import sqlite3
 import random
 
-# from flask import request
+from flask import request
 # from camera import SignLang
 
 app = Flask(__name__)
@@ -18,15 +18,31 @@ def home():
     return 'HOMEPAGE'
 
 
-@app.route('/lesson/<lesson_num>/<task_num>')
+@app.route('/lesson/<lesson_num>/<task_num>', methods=["GET", "POST"])
 def lesson(lesson_num, task_num):
     cursor.execute('SELECT * FROM tasks WHERE complexity = ? AND id = ?', (int(lesson_num), int(task_num)))
     lesson = cursor.fetchall()[0]
-    buttons = list(lesson[3:])
     correct_answer = lesson[3]
+    buttons = list(lesson[3:])
     random.shuffle(buttons)
-    return render_template('lesson.html', lesson_num=lesson_num, task_image='images/gestures/' + lesson[2], button_1=buttons[0], \
-                           button_2=buttons[1], button_3=buttons[2], button_4=buttons[3], task_num=int(task_num))
+
+    if request.method == 'GET':
+        return render_template('lesson.html', lesson_num=lesson_num, task_image='images/gestures/' + lesson[2], button_1=buttons[0], \
+                               button_2=buttons[1], button_3=buttons[2], button_4=buttons[3], task_num=int(task_num))
+
+    if request.method == '':
+        print('ne v etom delo')
+        if request.form.get(correct_answer):
+            return render_template('checking_answer_right.html', lesson_num=lesson_num, task_num=task_num)
+        else:
+            print('a v chem zhe suka')
+
+
+
+@app.route('/lesson/<lesson_num>/<task_num>/checking_answer', methods=["GET"])
+def checking_users_answer(lesson_num, task_num, users_answer, correct_answer):
+    print(users_answer == correct_answer)
+    return "nothing"
 
 
 @app.route('/user/<username>')
@@ -37,6 +53,24 @@ def profil(username):
 @app.route('/my_lessons/<user_id>')
 def lessons(user_id):
     pass
+
+
+@app.route('/reg', methods=['POST', 'GET'])
+def registration():
+    if request.method == 'GET':
+        return render_template('registration.html')
+    elif request.method == 'POST':
+        email = request.form.get('email')
+        username = request.form.get('username')
+        password = request.form.get('password')
+        name = request.form.get('name')
+
+        cursor.execute('''INSERT INTO users_information VALUES (?, ?, ?, ?, 1)''', (name, username, email, password))
+
+        connection.commit()
+        connection.close()
+
+        return "Форма отправлена"
 
 
 if __name__ == '__main__':
