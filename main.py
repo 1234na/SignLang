@@ -22,20 +22,25 @@ def home():
 def lesson(lesson_num, task_num):
     cursor.execute('SELECT * FROM tasks WHERE complexity = ? AND id = ?', (int(lesson_num), int(task_num)))
     lesson = cursor.fetchall()[0]
+    counter = 0
     correct_answer = lesson[3]
     buttons = list(lesson[3:])
     random.shuffle(buttons)
 
     if request.method == 'GET':
-        return render_template('lesson.html', lesson_num=lesson_num, task_image='images/gestures/' + lesson[2], button_1=buttons[0], \
+        return render_template('lesson.html', lesson_num=lesson_num, task_image='images/gestures/' + lesson[2], button_1=buttons[0],
                                button_2=buttons[1], button_3=buttons[2], button_4=buttons[3], task_num=int(task_num))
 
     if request.method == 'POST':
-        if request.form.get(correct_answer):
-            return render_template('checking_answer_right.html', lesson_num=lesson_num, task_num=task_num)
-        else:
-            return 'ДОБРЫЙ ВЕЧЕР'
+        answer = request.form.get("answer")
+        if answer == correct_answer:
+            n = buttons.index(correct_answer) + 1
+            counter += 1
+            return render_template('checking_answer_right.html', lesson_num=lesson_num, task_num=int(task_num))
 
+        else:
+            n = buttons.index(answer)
+            return render_template('checking_answer_false.html', lesson_num=lesson_num, task_num=int(task_num))
 
 
 @app.route('/lesson/<lesson_num>/<task_num>/checking_answer', methods=["GET"])
@@ -69,7 +74,7 @@ def registration():
         connection.commit()
         connection.close()
 
-        return "Форма отправлена"
+        return render_template('log_in.html', main='main')
 
 
 @app.route('/enter', methods=['POST', 'GET'])

@@ -137,6 +137,19 @@ video {
     height: 300px;
 }
 
+button {
+  position: relative;
+  margin: 0 0 0 20px;
+  padding: 30px 30px;
+  color: #333;
+  background-color: #e0ffff;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 10px;
+  border: 5px solid #666;
+  font-size: 40px
+}
+
 input {
   position: relative;
   margin: 0 0 0 20px;

@@ -19,10 +19,10 @@
     <div class="card">
         <div class="card_image"><img src="{{ url_for('static', filename=task_image) }}" height="300"></div>
         <form class="answer_form" method="post">
-            <input type="button" class="first" value={{button_1}} />
-            <input type="button" class="second" value={{button_2}} />
-            <input type="button" class="third" value={{button_3}} />
-            <input type="button" class="fourth" value={{button_4}} />
+            <button type="submit" class="first" name="answer" value="{{button_1}}">{{button_1}}</button>
+            <button type="submit" class="second" name="answer" value="{{button_2}}">{{button_2}}</button>
+            <button type="submit" class="third" name="answer" value="{{button_3}}">{{button_3}}</button>
+            <button type="submit" class="fourth" name="answer" value="{{button_4}}">{{button_4}}</button>
         </form>
     </div>
 </body>
