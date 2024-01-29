@@ -30,12 +30,11 @@ def lesson(lesson_num, task_num):
         return render_template('lesson.html', lesson_num=lesson_num, task_image='images/gestures/' + lesson[2], button_1=buttons[0], \
                                button_2=buttons[1], button_3=buttons[2], button_4=buttons[3], task_num=int(task_num))
 
-    if request.method == '':
-        print('ne v etom delo')
+    if request.method == 'POST':
         if request.form.get(correct_answer):
             return render_template('checking_answer_right.html', lesson_num=lesson_num, task_num=task_num)
         else:
-            print('a v chem zhe suka')
+            return 'ДОБРЫЙ ВЕЧЕР'
 
 
 
@@ -71,6 +70,28 @@ def registration():
         connection.close()
 
         return "Форма отправлена"
+
+
+@app.route('/enter', methods=['POST', 'GET'])
+@app.route('/enter/<ok>', methods=['POST', 'GET'])
+def log_in(ok='True'):
+    if request.method == 'GET' and ok == 'True':
+        return render_template('log_in.html', main='main')
+    elif request.method == 'GET' and ok == 'False':
+        return render_template('log_in.html', main='mistake')
+    elif request.method == 'POST':
+        username = request.form.get('username')
+        password = request.form.get('password')
+
+        password_right = cursor.execute(f'''SELECT Password FROM users_information WHERE nickname == "{username}"''').fetchall()
+        try:
+            if password_right[0][0] == password:
+                return render_template('homepage.html', username=username)
+            else:
+                return render_template('log_in.html', main='mistake')
+        except BaseException:
+            return render_template('log_in.html', main='mistake')
+
 
 
 if __name__ == '__main__':

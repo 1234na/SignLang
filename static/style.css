@@ -47,18 +47,6 @@ video {
     color: #ffcc00;
 }
 
-button {
-  position: relative;
-  padding: 30px 60px;
-  color: #333;
-  background-color: #e0ffff;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  border-radius: 10px;
-  border: 5px solid #666;
-  font-size: 40px;
-}
-
 .first {
   position: absolute;
   left: 800px;
@@ -114,6 +102,30 @@ button {
     background-color: #fcdd76;
     background-radius: 10px;
     width: 1280px;
+    height: 515px;
+}
+
+.mistake {
+    position: absolute;
+    top: 160px;
+    left: 200px;
+    border: 10px solid #a91d11;
+    border-radius:  20px;
+    background-color: #f13a13;
+    background-radius: 10px;
+    width: 1280px;
+    height: 515px;
+}
+
+.card {
+    position: absolute;
+    top: 160px;
+    left: 200px;
+    border: 10px solid #ffcc00;
+    border-radius:  20px;
+    background-color: #fcdd76;
+    background-radius: 10px;
+    width: 1280px;
     height: 320px;
 }
 
@@ -135,8 +147,7 @@ input {
   -webkit-border-radius: 5px;
   border-radius: 10px;
   border: 5px solid #666;
-  width: 150px;
-  height: 15px;
+  font-size: 40px
 }
 
 .continue {
