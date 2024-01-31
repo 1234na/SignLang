@@ -18,6 +18,11 @@ def home():
     return 'HOMEPAGE'
 
 
+@app.route('/ass')
+def ass():
+    return render_template('lesson_video.html')
+
+
 @app.route('/lesson/<lesson_num>/<task_num>', methods=["GET", "POST"])
 def lesson(lesson_num, task_num):
     cursor.execute('SELECT * FROM tasks WHERE complexity = ? AND id = ?', (int(lesson_num), int(task_num)))

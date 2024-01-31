@@ -11,9 +11,9 @@ h1 {
 }
 
 video {
-    border: 20px solid #ffcc00;
-    border-radius:  20px;
-    video-radius: 20px;
+    position: relative;
+    left: 50px;
+    top: 10px;
     transform: scale(-1, 1)
 }
 
