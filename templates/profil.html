@@ -2,13 +2,24 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>User-id={{username}}</title>
-    <link href="styles/style.css" rel="stylesheet" type="text/css" />
-    <link rel="shortcut icon" href="/images/icon.png" type="image/x-icon">
+    <title>Мой профиль</title>
+    <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet" type="text/css" />
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/icon.png') }}" type="image/x-icon">
 </head>
     <body>
+        <div class="sidebar">
+            <a href="/">На главную</a>
+        </div>
         <div class="head">
-          <h1>Добро пожаловать, {{username}}!</h1>
+            <h1>Добро пожаловать, {{username}}!</h1>
+            <a href="/user/{{username}}" class="avatar">
+                <img src="{{ url_for('static', filename='images/ava.png') }}" height="80">
+            </a>
+        </div>
+        <div class="main">
+            <h2>Имя пользователя: Наталья Александровна</h2>
+            <h2>Никнейм: {{username}}</h2>
+            <h2>Пароль: {{password}}</h2>
         </div>
     </body>
 </html>

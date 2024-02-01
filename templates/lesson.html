@@ -12,9 +12,9 @@
     </div>
     <div class="head">
         <h1>Урок {{lesson_num}}</h1>
-        <p class="avatar">
+        <a href="/user/{{username}}" class="avatar">
             <img src="{{ url_for('static', filename='images/ava.png') }}" height="80">
-        </p>
+        </a>
     </div>
     <div class="card">
         <div class="card_image"><img src="{{ url_for('static', filename=task_image) }}" height="300"></div>

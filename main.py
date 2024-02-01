@@ -2,6 +2,7 @@ from flask import Flask
 from flask import render_template
 import sqlite3
 import random
+from flask import redirect, url_for
 
 from flask import request
 # from camera import SignLang
@@ -18,45 +19,61 @@ def home():
     return 'HOMEPAGE'
 
 
-@app.route('/ass')
-def ass():
-    return render_template('lesson_video.html')
+@app.route('/lesson/<lesson_num>/<task_num>/<username>', methods=["GET", "POST"])
+def lesson(lesson_num, task_num, username):
+    try:
+        cursor.execute('SELECT * FROM tasks WHERE complexity = ? AND id = ?', (int(lesson_num), int(task_num)))
+        lesson = cursor.fetchall()[0]
+        counter = 0
+        correct_answer = lesson[3]
+        if lesson[2] == 'camera':
+            if request.method == 'GET':
+                return render_template('lesson_video.html', lesson_num=lesson_num, task_num=int(task_num),
+                                       username=username)
 
-
-@app.route('/lesson/<lesson_num>/<task_num>', methods=["GET", "POST"])
-def lesson(lesson_num, task_num):
-    cursor.execute('SELECT * FROM tasks WHERE complexity = ? AND id = ?', (int(lesson_num), int(task_num)))
-    lesson = cursor.fetchall()[0]
-    counter = 0
-    correct_answer = lesson[3]
-    buttons = list(lesson[3:])
-    random.shuffle(buttons)
-
-    if request.method == 'GET':
-        return render_template('lesson.html', lesson_num=lesson_num, task_image='images/gestures/' + lesson[2], button_1=buttons[0],
-                               button_2=buttons[1], button_3=buttons[2], button_4=buttons[3], task_num=int(task_num))
-
-    if request.method == 'POST':
-        answer = request.form.get("answer")
-        if answer == correct_answer:
-            n = buttons.index(correct_answer) + 1
-            counter += 1
-            return render_template('checking_answer_right.html', lesson_num=lesson_num, task_num=int(task_num))
+            if request.method == 'POST':
+                return 'AAAAAAAAAAAAAAAAAAAAA'
 
         else:
-            n = buttons.index(answer)
-            return render_template('checking_answer_false.html', lesson_num=lesson_num, task_num=int(task_num))
+            buttons = list(lesson[3:])
+            random.shuffle(buttons)
 
+            if request.method == 'GET':
+                return render_template('lesson.html', lesson_num=lesson_num, task_image='images/gestures/' + lesson[2],
+                                       button_1=buttons[0],
+                                       button_2=buttons[1], button_3=buttons[2], button_4=buttons[3],
+                                       task_num=int(task_num), username=username)
 
-@app.route('/lesson/<lesson_num>/<task_num>/checking_answer', methods=["GET"])
-def checking_users_answer(lesson_num, task_num, users_answer, correct_answer):
-    print(users_answer == correct_answer)
-    return "nothing"
+            if request.method == 'POST':
+                answer = request.form.get("answer")
+                if answer == correct_answer:
+                    n = buttons.index(correct_answer) + 1
+                    counter += 1
+                    return render_template('checking_answer_right.html', lesson_num=lesson_num, task_num=int(task_num),
+                                           username=username)
+
+                else:
+                    n = buttons.index(answer)
+                    return render_template('checking_answer_false.html', lesson_num=lesson_num, task_num=int(task_num),
+                                           username=username)
+    except BaseException:
+        if (int(lesson_num) + 1,) in cursor.execute('SELECT complexity FROM tasks').fetchall():
+            cursor.execute('UPDATE users_information SET next_lesson_num=? WHERE nickname=?', (int(lesson_num) + 1, username))
+            connection.commit()
+            return redirect(url_for('lesson', lesson_num=int(lesson_num) + 1, task_num=1, username=username))
+        else:
+            return 'Урок не найден'
+
 
 
 @app.route('/user/<username>')
 def profil(username):
-    return render_template('profil.html', username=username)
+    try:
+        password = cursor.execute(
+            f'''SELECT Password FROM users_information WHERE nickname == "{username}"''').fetchall()
+        return render_template('profil.html', username=username, password=password[0][0])
+    except BaseException:
+        return 'Пользователь не найден'
 
 
 @app.route('/my_lessons/<user_id>')
