@@ -9,12 +9,14 @@
 <body>
     <div class="sidebar">
         <img src="{{ url_for('static', filename='images/main_picture.png') }}" height="150">
-        <a href="user/">Профиль</a>
-        <a href="/">Выйти</a>
+        <a href="/enter">Вход</a>
+        <a href="/reg">Регистрация</a>
     </div>
-    <h1>Уроки</h1>
+    <div class="head">
+        <h1>SignLang - учите язык жестов с удовольствием!</h1>
+    </div>
     <div class="main">
-        <a href="/lesson/{{lesson_num}}/1/{{username}}"><button>Перейти к уроку {{lesson_num}}</button></a>
+        <p>Текст</p>
     </div>
 </body>
 </html>
